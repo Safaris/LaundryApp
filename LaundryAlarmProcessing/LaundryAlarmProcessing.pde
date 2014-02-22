@@ -77,7 +77,9 @@ void sendLaundryDone()
    UsersResources userres = twitter.users();
    try {
        User user = userres.showUser(USER_TWITTER);
-       DirectMessage message = twitter.sendDirectMessage(user.getId(), "Laundry is done, figga");
+       StatusUpdate latestStatus = new StatusUpdate("@" + USER_TWITTER + " Laundry is done!";
+       Status status = twitter.updateStatus(latestStatus);
+      // DirectMessage message = twitter.sendDirectMessage(user.getId(), "Laundry is done, figga");
    } catch(Exception e) {
        println(e);
    }
