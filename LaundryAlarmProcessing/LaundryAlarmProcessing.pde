@@ -16,7 +16,7 @@ long lastVibrationTime;
 
 void setup()
 {
-    size(screenWidth, screenHeight);
+    size(800, 800);
 
     String portName = Serial.list()[0];
     myPort = new Serial(this, portName, 9600);
@@ -29,22 +29,22 @@ void draw()
 {
     background(0);
     
-    textSize(60);
+    textSize(20);
     fill(255);
     if(running) {
         if(millis() - lastVibrationTime < 30 * 1000) {
-            text("LAUNDRY IN PROGRESS", 20, screenHeight/2);
+            text("LAUNDRY IN PROGRESS", 10, displayHeight/2);
         } else {
-            text("LAUNDRY IS DONE!", 20, screenHeight/2);
+            text("LAUNDRY IS DONE!", 10, displayHeight/2);
             myPort.write('!');
             running = false;
             
             sendLaundryDone();
         }
         
-        text((millis() - lastVibrationTime) / 1000.0, screenWidth/2, screenHeight/2);
+        text((millis() - lastVibrationTime) / 1000.0, 10, displayHeight/2 + 30);
     } else {
-        text("PRESS BUTTON TO START", 20, screenHeight/2);
+        text("PRESS BUTTON TO START", 10, displayHeight/2);
     }
 }
 
@@ -61,6 +61,8 @@ void sendLaundryDone()
    sendgrid.setText("Hey, just wanted to let you know that your laundry is done.\nBetter pick it up before someone else does.\n");
   
    sendgrid.send();
+   
+   println("SENT EMAIL");
 }
 
 void serialEvent(Serial port)
@@ -69,16 +71,21 @@ void serialEvent(Serial port)
     serialStr = serialStr.substring(0, serialStr.length() - 1);
 
     if (serialStr.charAt(0) == '{') {
-        JSONObject json = new JSONObject(serialStr);
-        int xv = json.getInt("x");
-        int yv = json.getInt("y");
-        int zv = json.getInt("z");
-
-        if(abs(xv) + abs(yv) + abs(zv) > SENSITIVITY) {
-            lastVibrationTime = millis();
+        try {
+            JSONObject json = new JSONObject(serialStr);
+            int xv = json.getInt("x");
+            int yv = json.getInt("y");
+            int zv = json.getInt("z");
+    
+            if(abs(xv) + abs(yv) + abs(zv) > SENSITIVITY) {
+                lastVibrationTime = millis();
+            }
+        } catch(Exception e) {
+            println("Exception cast on JSON stuff");
         }
     } else if(serialStr.substring(0,7).equals("[start]")) {
         running = true;
+        lastVibrationTime = millis();
     } else {
         println(serialStr);
     }
