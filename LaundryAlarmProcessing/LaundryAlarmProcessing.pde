@@ -1,10 +1,13 @@
 import org.json.JSONObject;
-
 import processing.serial.*;
 
-Serial myPort;
+final static String USER_EMAIL = "shoffing@gmail.com";
+final static String USER_PHONE = "6093542426";
+final static String USER_TWITTER = "shoffing";
 
-final static private int SENSITIVITY = 400;
+final static int SENSITIVITY = 400;
+
+Serial myPort;
 
 boolean running;
 long lastVibrationTime;
@@ -33,12 +36,19 @@ void draw()
             text("LAUNDRY IS DONE!", 20, screenHeight/2);
             myPort.write('!');
             running = false;
+            
+            sendLaundryDone();
         }
         
         text((millis() - lastVibrationTime) / 1000.0, screenWidth/2, screenHeight/2);
     } else {
         text("PRESS BUTTON TO START", 20, screenHeight/2);
     }
+}
+
+void sendLaundryDone()
+{
+    // put twitter api and stuff here
 }
 
 void serialEvent(Serial port)
@@ -56,7 +66,6 @@ void serialEvent(Serial port)
             lastVibrationTime = millis();
         }
     } else if(serialStr.substring(0,7).equals("[start]")) {
-        println("STARTING OMG");
         running = true;
     } else {
         println(serialStr);
