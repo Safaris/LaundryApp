@@ -21,7 +21,7 @@ PFont lobsterFont, arvoFont;
 
 void setup()
 {
-    size(800, 800);
+    size(displayWidth, displayHeight);
     
     loading = true;
     
