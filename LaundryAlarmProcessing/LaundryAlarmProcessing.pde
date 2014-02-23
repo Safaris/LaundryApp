@@ -81,10 +81,10 @@ void sendLaundryDone()
    
    ConfigurationBuilder cb = new ConfigurationBuilder();
    cb.setDebugEnabled(true);
-   cb.setOAuthConsumerKey("1GJBae4bYerZgvywIuqoQ");
-   cb.setOAuthConsumerSecret("1I3UfAiRUsfcy9J1FK1DYU8XHDOpcXnZrDE1uxmo");
-   cb.setOAuthAccessToken("1280785147-Oe9vFIEJmWmq99Ohi44wFbMSzP1WS11chVAx9iM");
-   cb.setOAuthAccessTokenSecret("FnVC5R3Dhjvixp4zZmykdF4a0z7AApuwklTrap71eEOlt");
+   cb.setOAuthConsumerKey("dX57u33UBrGjIhQ8vKlw");
+   cb.setOAuthConsumerSecret("FUu0Mc9urMOUd2GBQHPXmPhB4qu8kc0coMAAOJ57G0");
+   cb.setOAuthAccessToken("2357203603-dfg66Wz8HVicsJaOGyV6zYSN7cl64gQ1vFOdkJS");
+   cb.setOAuthAccessTokenSecret("yDEMPcu0xfgeLH03ZVLwaQf5Yxyf8ljr2LjMuy20mcYXl");
    Date dNow = new Date();
    SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
 
