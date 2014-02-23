@@ -35,10 +35,13 @@ void setup()
   
   running = false;
 
-  Serial.println("Starting up L3G4200D");
+  Serial.println("[loading]");
+  
   setupL3G4200D(250); // Configure L3G4200  - 250, 500 or 2000 deg/sec
   
   delay(250); // wait for the sensor to be ready
+  
+  Serial.println("[loaded]");
 }
 
 void loop()
