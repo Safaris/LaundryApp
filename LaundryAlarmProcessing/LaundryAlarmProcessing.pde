@@ -72,12 +72,15 @@ void sendLaundryDone()
    cb.setOAuthConsumerSecret("1I3UfAiRUsfcy9J1FK1DYU8XHDOpcXnZrDE1uxmo");
    cb.setOAuthAccessToken("1280785147-Oe9vFIEJmWmq99Ohi44wFbMSzP1WS11chVAx9iM");
    cb.setOAuthAccessTokenSecret("FnVC5R3Dhjvixp4zZmykdF4a0z7AApuwklTrap71eEOlt");
+   Date dNow = new Date( );
+   SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+
    TwitterFactory builder = new TwitterFactory(cb.build());
    Twitter twitter=builder.getInstance();
    UsersResources userres = twitter.users();
    try {
        User user = userres.showUser(USER_TWITTER);
-       StatusUpdate latestStatus = new StatusUpdate("@" + USER_TWITTER + " Laundry is done!");
+       StatusUpdate latestStatus = new StatusUpdate("@" + USER_TWITTER + " Laundry is done! (" + ft + ")");
        Status status = twitter.updateStatus(latestStatus);
       // DirectMessage message = twitter.sendDirectMessage(user.getId(), "Laundry is done, figga");
    } catch(Exception e) {
