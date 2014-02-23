@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 
 final static String USER_EMAIL = "shoffing@gmail.com";
-final static String USER_PHONE = "6093542426";
+final static String USER_PHONE = "6093542426@vtext.com";
 final static String USER_TWITTER = "shoffing";
 
 final static int SENSITIVITY = 300;
@@ -58,13 +58,24 @@ void sendLaundryDone()
    SendGrid sendgrid = new SendGrid("jackjamieson", "HacktcnJ14");
 
    sendgrid.addTo(USER_EMAIL);
-   sendgrid.setFrom("laundryMachine@tcnj.edu");
+   sendgrid.setFrom("LaundryMachine@tcnj.edu");
    sendgrid.setSubject("Laundry is done!");
    sendgrid.setText("Hey, just wanted to let you know that your laundry is done.\nBetter pick it up before someone else does.\n");
   
    sendgrid.send();
    
    println("SENT EMAIL");
+   
+   //
+
+   sendgrid.addTo(USER_PHONE);
+   sendgrid.setFrom("LaundryMachine@tcnj.edu");
+   sendgrid.setSubject("Laundry is done!");
+   sendgrid.setText("Hey, your laundry is done. Go get it!");
+  
+   sendgrid.send();
+   
+   println("SENT PHONE");
    
    //
    
